@@ -39,7 +39,7 @@ public class TransactionService {
 
         Transactions tx = new Transactions();
         tx.setUser(user);
-        tx.setTransactionType(type.toUpperCase());          // "INCOME" or "EXPENSE"
+        tx.setTransactionType(type.toUpperCase());
         tx.setAmount(amount);
         tx.setTransactionDate(date);
         tx.setCategory(category);
