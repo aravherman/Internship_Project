@@ -18,7 +18,7 @@ public interface TransactionRepo extends JpaRepository<Transactions, Long> {
     // ── Used by TransactionController (all + filtered) ──
     List<Transactions> findByUserUserIdOrderByTransactionDateDesc(Long userId);
 
-    List<Transactions> findByUserUserIdAndTypeOrderByTransactionDateDesc(Long userId, String type);
+    List<Transactions> findByUserUserIdAndTransactionTypeOrderByTransactionDateDesc(Long userId, String transactionType);
 
     List<Transactions> findByUserUserIdAndCategoryCategoryIdOrderByTransactionDateDesc(Long userId, Long categoryId);
 
@@ -26,9 +26,9 @@ public interface TransactionRepo extends JpaRepository<Transactions, Long> {
     Transactions findByTransactionIdAndUserUserId(Long transactionId, Long userId);
 
     // ── Summary totals ──
-    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.type = 'INCOME'")
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
     BigDecimal sumIncome(@Param("userId") Long userId);
 
-    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.type = 'EXPENSE'")
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE'")
     BigDecimal sumExpenses(@Param("userId") Long userId);
 }

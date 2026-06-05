@@ -96,7 +96,7 @@
           <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">home</span>
           <span class="font-label-lg text-label-lg">Home</span>
         </a>
-        <a class="<%= uri.startsWith("/trans/transpage")  ? activeClass : inactiveClass %>" href="/trans/transpage">
+        <a class="<%= uri.startsWith("/transactions")  ? activeClass : inactiveClass %>" href="/transactions">
           <span class="material-symbols-outlined">list_alt</span>
           <span class="font-label-lg text-label-lg">Transactions</span>
         </a>
@@ -136,7 +136,7 @@
           </p>
         </div>
         <div class="flex items-center gap-sm">
-          <a href="/add"
+          <a href="/transactions/add"
             class="bg-primary text-white px-4 py-2 rounded-lg font-label-lg text-label-lg flex items-center gap-xs hover:opacity-90 active:scale-95 transition-all">
             <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">add</span>
             Quick Add
@@ -224,7 +224,7 @@
                           <td class="px-6 py-4 flex items-center gap-3">
                             <div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
                               <c:choose>
-                                <c:when test="${tx.type == 'INCOME'}">
+                                <c:when test="${tx.transactionType == 'INCOME'}">
                                   <span class="material-symbols-outlined text-sm">payments</span>
                                 </c:when>
                                 <c:otherwise>
@@ -238,7 +238,7 @@
                           </td>
                           <td class="px-6 py-4">
                             <c:choose>
-                              <c:when test="${tx.type == 'INCOME'}">
+                              <c:when test="${tx.transactionType == 'INCOME'}">
                                 <span class="px-2 py-1 bg-primary-container/10 text-primary rounded text-xs">
                                   <c:out value="${tx.category != null ? tx.category.categoryName : 'Income'}"/>
                                 </span>
@@ -251,12 +251,12 @@
                             </c:choose>
                           </td>
                           <td class="px-6 py-4 font-body-sm text-body-sm text-on-surface-variant">
-                            <fmt:formatDate value="${tx.transactionDate}" pattern="dd MMM yyyy"/>
+                            <c:out value="${tx.transactionDate.toString().substring(0, 10)}"/>
                           </td>
                           <td class="px-6 py-4 font-body-md text-body-md font-bold text-right
-                            ${tx.type == 'INCOME' ? 'text-primary' : 'text-secondary'}">
+                            ${tx.transactionType == 'INCOME' ? 'text-primary' : 'text-secondary'}">
                             <c:choose>
-                              <c:when test="${tx.type == 'INCOME'}">+</c:when>
+                              <c:when test="${tx.transactionType == 'INCOME'}">+</c:when>
                               <c:otherwise>-</c:otherwise>
                             </c:choose>
                             ₹<fmt:formatNumber value="${tx.amount}" pattern="#,##0.00"/>
@@ -268,7 +268,7 @@
                       <tr>
                         <td colspan="4" class="px-6 py-12 text-center text-on-surface-variant font-body-sm">
                           No transactions yet.
-                          <a href="/add" class="text-primary font-semibold hover:underline ml-1">Add your first one →</a>
+                          <a href="/transactions/add" class="text-primary font-semibold hover:underline ml-1">Add your first one →</a>
                         </td>
                       </tr>
                     </c:otherwise>
@@ -285,7 +285,7 @@
             <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
               <h2 class="font-headline-sm text-headline-sm text-on-surface mb-4">Quick Actions</h2>
               <div class="grid grid-cols-2 gap-3">
-                <a href="/add"
+                <a href="/transactions/add"
                   class="flex flex-col items-center gap-2 p-4 bg-surface-container-low rounded-xl hover:bg-primary-container/10 hover:text-primary transition-all text-on-surface-variant">
                   <span class="material-symbols-outlined">add_circle</span>
                   <span class="font-label-md text-label-md text-center">Add Transaction</span>
@@ -358,7 +358,7 @@
     </main>
 
     <%-- Mobile FAB --%>
-    <a href="/add"
+    <a href="/transactions/add"
       class="md:hidden fixed bottom-20 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-50">
       <span class="material-symbols-outlined text-2xl" style="font-variation-settings:'FILL' 1">add</span>
     </a>

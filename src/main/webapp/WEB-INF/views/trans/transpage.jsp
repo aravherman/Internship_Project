@@ -226,14 +226,14 @@
                       <c:forEach var="tx" items="${transactions}">
                         <tr class="hover:bg-surface-container-low/50 transition-colors group">
                           <td class="px-6 py-4 font-body-sm text-on-surface">
-                            <fmt:formatDate value="${tx.transactionDate}" pattern="dd MMM yyyy"/>
+                            <c:out value="${tx.transactionDate.toString().substring(0, 10)}"/>
                           </td>
                           <td class="px-6 py-4">
                             <div class="flex items-center gap-sm">
                               <div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center text-primary">
                                 <span class="material-symbols-outlined text-[18px]">
                                   <c:choose>
-                                    <c:when test="${tx.type == 'INCOME'}">payments</c:when>
+                                    <c:when test="${tx.transactionType == 'INCOME'}">payments</c:when>
                                     <c:otherwise>shopping_bag</c:otherwise>
                                   </c:choose>
                                 </span>
@@ -245,7 +245,7 @@
                           </td>
                           <td class="px-6 py-4">
                             <c:choose>
-                              <c:when test="${tx.type == 'INCOME'}">
+                              <c:when test="${tx.transactionType == 'INCOME'}">
                                 <span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant font-label-md text-[11px] uppercase tracking-wide">Income</span>
                               </c:when>
                               <c:otherwise>
@@ -256,9 +256,9 @@
                           <td class="px-6 py-4 font-body-md text-on-surface">
                             <c:out value="${tx.description}"/>
                           </td>
-                          <td class="px-6 py-4 font-headline-sm text-right ${tx.type == 'INCOME' ? 'text-primary' : 'text-secondary'}">
+                          <td class="px-6 py-4 font-headline-sm text-right ${tx.transactionType == 'INCOME' ? 'text-primary' : 'text-secondary'}">
                             <c:choose>
-                              <c:when test="${tx.type == 'INCOME'}">+</c:when>
+                              <c:when test="${tx.transactionType == 'INCOME'}">+</c:when>
                               <c:otherwise>-</c:otherwise>
                             </c:choose>
                             ₹<fmt:formatNumber value="${tx.amount}" pattern="#,##0.00"/>
