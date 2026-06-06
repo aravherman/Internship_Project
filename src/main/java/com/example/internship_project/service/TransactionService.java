@@ -78,12 +78,12 @@ public class TransactionService {
 
     // ── Summary helpers ──
     public BigDecimal getTotalIncome(Long userId) {
-        BigDecimal v = transactionRepo.sumIncome(userId);
+        BigDecimal v = transactionRepo.sumIncomeByUserId(userId);
         return v != null ? v : BigDecimal.ZERO;
     }
 
     public BigDecimal getTotalExpenses(Long userId) {
-        BigDecimal v = transactionRepo.sumExpenses(userId);
+        BigDecimal v = transactionRepo.sumExpensesByUserId(userId);
         return v != null ? v : BigDecimal.ZERO;
     }
 }

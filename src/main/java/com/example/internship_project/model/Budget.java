@@ -24,6 +24,9 @@ public class Budget {
     @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal budgetAmount;
 
+    @Column(nullable = false)
+    private String period;
+
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
@@ -65,6 +68,14 @@ public class Budget {
 
     public void setBudgetAmount(BigDecimal budgetAmount) {
         this.budgetAmount = budgetAmount;
+    }
+
+    public String getPeriod() {
+        return period;
+    }
+
+    public void setPeriod(String period) {
+        this.period = period;
     }
 
     public LocalDate getStartDate() {

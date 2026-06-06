@@ -12,20 +12,30 @@ import java.util.List;
 @Repository
 public interface TransactionRepo extends JpaRepository<Transactions, Long> {
 
-    // ── Used by HomeController & TransactionController ──
+    // HomeController — recent 5
+    List<Transactions> findTop5ByUserUserIdOrderByTransactionDateDesc(Long userId);
+
+    // TransactionController — full list + filters
     List<Transactions> findByUserUserIdOrderByTransactionDateDesc(Long userId);
+    List<Transactions> findByUserUserIdAndTransactionTypeOrderByTransactionDateDesc(Long userId, String type);
 
-    List<Transactions> findByUserUserIdAndTransactionTypeOrderByTransactionDateDesc(Long userId, String transactionType);
-
-    List<Transactions> findByUserUserIdAndCategoryCategoryIdOrderByTransactionDateDesc(Long userId, Long categoryId);
-
-    // ── Ownership-safe single fetch (edit / delete) ──
+    // Ownership-safe single fetch (edit / delete)
     Transactions findByTransactionIdAndUserUserId(Long transactionId, Long userId);
 
-    // ── Summary totals ──
-    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
-    BigDecimal sumIncome(@Param("userId") Long userId);
+    // Summary totals (all categories)
+       // Use the actual property name `transactionType` from the Transactions entity
+       @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
+    BigDecimal sumIncomeByUserId(@Param("userId") Long userId);
 
-    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE'")
-    BigDecimal sumExpenses(@Param("userId") Long userId);
+       @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE'")
+    BigDecimal sumExpensesByUserId(@Param("userId") Long userId);
+
+    // BudgetService — expenses for a specific category this month
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t " +
+           "WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE' " +
+           "AND t.category.categoryId = :categoryId " +
+           "AND MONTH(t.transactionDate) = MONTH(CURRENT_DATE) " +
+           "AND YEAR(t.transactionDate)  = YEAR(CURRENT_DATE)")
+    BigDecimal sumExpensesByUserIdAndCategoryId(@Param("userId") Long userId,
+                                                @Param("categoryId") Long categoryId);
 }

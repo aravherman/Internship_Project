@@ -36,8 +36,8 @@ public class HomeController {
         List<Transactions> recentTransactions =
                 transactionRepo.findByUserUserIdOrderByTransactionDateDesc(userId);
 
-        BigDecimal totalIncome   = transactionRepo.sumIncome(userId);
-        BigDecimal totalExpenses = transactionRepo.sumExpenses(userId);
+        BigDecimal totalIncome   = transactionRepo.sumIncomeByUserId(userId);
+        BigDecimal totalExpenses = transactionRepo.sumExpensesByUserId(userId);
 
         if (totalIncome   == null) totalIncome   = BigDecimal.ZERO;
         if (totalExpenses == null) totalExpenses = BigDecimal.ZERO;
