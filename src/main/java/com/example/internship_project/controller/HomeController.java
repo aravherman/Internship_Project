@@ -34,7 +34,7 @@ public class HomeController {
 
         //recent trans
         List<Transactions> recentTransactions =
-                transactionRepo.OrderByTransactionDateDesc(userId);
+                transactionRepo.findByUserUserIdOrderByTransactionDateDesc(userId);
 
         BigDecimal totalIncome   = transactionRepo.sumIncome(userId);
         BigDecimal totalExpenses = transactionRepo.sumExpenses(userId);

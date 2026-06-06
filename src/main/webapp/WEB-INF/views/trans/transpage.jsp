@@ -264,12 +264,7 @@
                             ₹<fmt:formatNumber value="${tx.amount}" pattern="#,##0.00"/>
                           </td>
                           <td class="px-6 py-4 text-right">
-                            <div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">
-                              <%-- Edit --%>
-                              <a href="/transactions/edit/${tx.transactionId}"
-                                class="p-2 hover:bg-surface-container-high rounded-full transition-colors text-outline">
-                                <span class="material-symbols-outlined text-[20px]">edit</span>
-                              </a>
+                            <div class="flex items-center justify-end gap-xs opacity-0 group-hover:opacity-100 transition-opacity">   
                               <%-- Delete — uses a small form for POST --%>
                               <form action="/transactions/delete/${tx.transactionId}" method="post"
                                 onsubmit="return confirm('Delete this transaction?');" style="display:inline;">

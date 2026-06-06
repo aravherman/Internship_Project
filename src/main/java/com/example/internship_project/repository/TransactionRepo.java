@@ -12,10 +12,7 @@ import java.util.List;
 @Repository
 public interface TransactionRepo extends JpaRepository<Transactions, Long> {
 
-    // ── Used by HomeController ──
-    List<Transactions> OrderByTransactionDateDesc(Long userId);
-
-    // ── Used by TransactionController (all + filtered) ──
+    // ── Used by HomeController & TransactionController ──
     List<Transactions> findByUserUserIdOrderByTransactionDateDesc(Long userId);
 
     List<Transactions> findByUserUserIdAndTransactionTypeOrderByTransactionDateDesc(Long userId, String transactionType);
