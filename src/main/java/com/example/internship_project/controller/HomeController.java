@@ -34,7 +34,7 @@ public class HomeController {
 
         //recent trans
         List<Transactions> recentTransactions =
-                transactionRepo.findByUserUserIdOrderByTransactionDateDesc(userId);
+                transactionRepo.findTop5ByUserUserIdOrderByTransactionDateDesc(userId);
 
         BigDecimal totalIncome   = transactionRepo.sumIncomeByUserId(userId);
         BigDecimal totalExpenses = transactionRepo.sumExpensesByUserId(userId);

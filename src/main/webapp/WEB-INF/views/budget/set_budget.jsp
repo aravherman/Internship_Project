@@ -122,7 +122,7 @@
             </div>
 
             <%-- Period --%>
-            <div class="space-y-xs">
+            <!-- <div class="space-y-xs">
               <label class="font-label-lg text-label-lg text-on-surface block">Period</label>
               <select name="period"
                 class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md bg-white appearance-none outline-none">
@@ -130,7 +130,7 @@
                 <option value="WEEKLY">Weekly</option>
                 <option value="YEARLY">Yearly</option>
               </select>
-            </div>
+            </div> -->
 
             <div class="flex flex-col sm:flex-row items-center gap-md pt-md">
               <button type="submit"

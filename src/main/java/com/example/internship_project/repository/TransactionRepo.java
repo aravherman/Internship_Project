@@ -23,7 +23,6 @@ public interface TransactionRepo extends JpaRepository<Transactions, Long> {
     Transactions findByTransactionIdAndUserUserId(Long transactionId, Long userId);
 
     // Summary totals (all categories)
-       // Use the actual property name `transactionType` from the Transactions entity
        @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
     BigDecimal sumIncomeByUserId(@Param("userId") Long userId);
 

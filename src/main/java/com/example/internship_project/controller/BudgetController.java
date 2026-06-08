@@ -38,7 +38,7 @@ public class BudgetController {
 
         List<Budget> budgets = budgetService.getAllByUser(userId);
 
-        // Build a richer view object: budget + actual spent + percent
+        // budget + actual spent + percent
         List<Map<String, Object>> budgetRows = new ArrayList<>();
         for (Budget b : budgets) {
             BigDecimal spent   = budgetService.getActualSpent(userId, b.getCategory().getCategoryId());
@@ -46,9 +46,12 @@ public class BudgetController {
 
             // status label
             String status;
-            if (percent >= 100) status = "OVER BUDGET";
-            else if (percent >= 80) status = "WARNING";
-            else                   status = "HEALTHY";
+            if (percent >= 100) 
+                status = "OVER BUDGET";
+            else if (percent >= 80) 
+                status = "WARNING";
+            else                   
+                status = "HEALTHY";
 
             Map<String, Object> row = new HashMap<>();
             row.put("budget",  b);
@@ -61,9 +64,9 @@ public class BudgetController {
         BigDecimal totalLimit = budgetService.getTotalLimit(userId);
         BigDecimal totalSpent = budgetService.getTotalSpent(userId);
         int overallPercent    = budgetService.getPercentUsed(totalLimit, totalSpent);
-        // Remaining percent for the gauge (clamp 0–100)
+        // Remaining percent for the gauge
         int remainingPercent  = Math.max(0, 100 - overallPercent);
-        // SVG stroke-dashoffset: circumference = 2 * PI * 80 ≈ 502.6
+        // Circumference = 2 * PI * 80 ≈ 502.6
         double dashOffset     = 502.6 * (1.0 - remainingPercent / 100.0);
 
         model.addAttribute("budgetRows",       budgetRows);

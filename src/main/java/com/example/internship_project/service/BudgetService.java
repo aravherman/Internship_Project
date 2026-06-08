@@ -96,7 +96,8 @@ public class BudgetService {
 
     // ── Percentage used (capped at 999 to avoid SVG weirdness) ──
     public int getPercentUsed(BigDecimal limitAmount, BigDecimal actualSpent) {
-        if (limitAmount == null || limitAmount.compareTo(BigDecimal.ZERO) == 0) return 0;
+        if (limitAmount == null || limitAmount.compareTo(BigDecimal.ZERO) == 0) 
+            return 0;
         return actualSpent
                 .multiply(BigDecimal.valueOf(100))
                 .divide(limitAmount, 0, RoundingMode.HALF_UP)

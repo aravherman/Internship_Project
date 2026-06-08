@@ -339,13 +339,13 @@
             <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
               <div class="flex justify-between items-center mb-6">
                 <h2 class="font-headline-sm text-headline-sm text-on-surface">Financial Goals</h2>
-                <a href="/goals/goalspage" class="text-primary font-label-md text-label-md hover:underline">Manage Goals</a>
+                <a href="/goals" class="text-primary font-label-md text-label-md hover:underline">Manage Goals</a>
               </div>
               <%-- Placeholder — replace with dynamic goal list once GoalService is wired --%>
               <div class="flex flex-col items-center justify-center py-8 text-on-surface-variant">
                 <span class="material-symbols-outlined text-4xl mb-3 text-outline">stars</span>
                 <p class="font-body-sm text-body-sm mb-3">Track your savings goals here.</p>
-                <a href="/goals/add_goal"
+                <a href="/goals/add"
                   class="px-4 py-2 bg-primary text-white rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-all">
                   + Set a Goal
                 </a>

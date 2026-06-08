@@ -24,7 +24,7 @@ public class Goal {
     private BigDecimal targetAmount;
 
     @Column(name = "saved_amount", precision = 12, scale = 2)
-    private BigDecimal savedAmount = BigDecimal.ZERO;
+    private BigDecimal currentAmount = BigDecimal.ZERO;
 
     @Column(name = "target_date")
     private LocalDate targetDate;
@@ -60,11 +60,11 @@ public class Goal {
     public void setTargetAmount(BigDecimal targetAmount) {
         this.targetAmount = targetAmount;
     }
-    public BigDecimal getSavedAmount() {
-        return savedAmount;
+    public BigDecimal getCurrentAmount() {
+        return currentAmount;
     }
-    public void setSavedAmount(BigDecimal savedAmount) {
-        this.savedAmount = savedAmount;
+    public void setCurrentAmount(BigDecimal currentAmount) {
+        this.currentAmount = currentAmount;
     }
     public LocalDate getTargetDate() {
         return targetDate;
