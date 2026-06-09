@@ -125,4 +125,8 @@ public class GoalService {
         BigDecimal current = goal.getCurrentAmount() != null ? goal.getCurrentAmount() : BigDecimal.ZERO;
         return goal.getTargetAmount().subtract(current).max(BigDecimal.ZERO);
     }
+
+    public List<Goal> getTop3Goals(Long userId) {
+    return goalRepo.findTop3ByUserUserIdOrderByTargetDateAsc(userId);
+    }
 }

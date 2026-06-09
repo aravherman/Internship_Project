@@ -128,7 +128,7 @@ public class AuthController {
         session.setAttribute("loggedInUser", user);
         session.setAttribute("userId", user.getUserId());
         session.setAttribute("userName", user.getFullName());
-        session.setMaxInactiveInterval(5000);
+        session.setMaxInactiveInterval(10000);
         return "redirect:/home";
     }
 

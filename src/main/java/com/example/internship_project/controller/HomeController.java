@@ -1,9 +1,11 @@
 package com.example.internship_project.controller;
 
+import com.example.internship_project.model.Goal;
 import com.example.internship_project.model.Transactions;
 import com.example.internship_project.model.User;
 import com.example.internship_project.repository.TransactionRepo;
 // import com.example.internship_project.repository.SubscriptionRepo;
+import com.example.internship_project.service.GoalService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class HomeController {
     @Autowired
     private TransactionRepo transactionRepo;
 
+    @Autowired
+    private GoalService goalService;
+
     // @Autowired
     // private SubscriptionRepo subscriptionRepo;
 
@@ -31,7 +36,7 @@ public class HomeController {
         }
 
         Long userId = user.getUserId();
-
+        // GoalService goalService = new GoalService();
         //recent trans
         List<Transactions> recentTransactions =
                 transactionRepo.findTop5ByUserUserIdOrderByTransactionDateDesc(userId);
@@ -50,6 +55,8 @@ public class HomeController {
         model.addAttribute("totalExpenses",    totalExpenses);
         model.addAttribute("balance",          balance);
 
+        List<Goal> topGoals = goalService.getTop3Goals(user.getUserId());
+        model.addAttribute("goals", topGoals);
         return "home";
     }
 }

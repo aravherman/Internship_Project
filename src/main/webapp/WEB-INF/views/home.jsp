@@ -342,14 +342,48 @@
                 <a href="/goals" class="text-primary font-label-md text-label-md hover:underline">Manage Goals</a>
               </div>
               <%-- Placeholder — replace with dynamic goal list once GoalService is wired --%>
-              <div class="flex flex-col items-center justify-center py-8 text-on-surface-variant">
-                <span class="material-symbols-outlined text-4xl mb-3 text-outline">stars</span>
-                <p class="font-body-sm text-body-sm mb-3">Track your savings goals here.</p>
-                <a href="/goals/add"
-                  class="px-4 py-2 bg-primary text-white rounded-lg font-label-lg text-label-lg hover:opacity-90 transition-all">
-                  + Set a Goal
-                </a>
-              </div>
+              <c:choose>
+                  <c:when test="${empty goals}">
+                      <div class="flex flex-col items-center justify-center py-8 text-on-surface-variant">
+                          <p class="font-body-sm text-body-sm mb-3">
+                              No goals set yet.
+                          </p>
+
+                          <a href="/goals/add"
+                            class="px-4 py-2 bg-primary text-white rounded-lg font-label-lg hover:opacity-90 transition-all">
+                              + Set a Goal
+                          </a>
+                      </div>
+                  </c:when>
+
+                  <c:otherwise>
+                      <div class="space-y-3">
+                          <c:forEach var="goal" items="${goals}">
+                              <div class="w-full p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+                                  <p class="font-label-lg text-on-surface">
+                                      ${goal.goalName}
+                                  </p>
+
+                                  <p class="text-sm text-on-surface-variant">
+                                      Target:
+                                      ₹<fmt:formatNumber value="${goal.targetAmount}" pattern="#,##0.00"/>
+
+                                      |
+
+                                      Saved:
+                                      ₹<fmt:formatNumber value="${goal.currentAmount}" pattern="#,##0.00"/>
+                                  </p>
+                              </div>
+                          </c:forEach>
+
+                          <a href="/goals"
+                            class="text-primary text-sm font-semibold">
+                              View All Goals →
+                          </a>
+                      </div>
+                  </c:otherwise>
+
+              </c:choose>
             </div>
           </div>
 

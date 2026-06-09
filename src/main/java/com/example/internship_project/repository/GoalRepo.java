@@ -12,4 +12,6 @@ public interface GoalRepo extends JpaRepository<Goal, Long> {
     List<Goal> findByUserUserIdOrderByTargetDateAsc(Long userId);
 
     Goal findByGoalIdAndUserUserId(Long goalId, Long userId);
+
+    List<Goal> findTop3ByUserUserIdOrderByTargetDateAsc(Long userId);
 }
