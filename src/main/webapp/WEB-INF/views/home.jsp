@@ -141,7 +141,7 @@
             <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">add</span>
             Quick Add
           </a>
-          <a href="/subsc/subscriptionpage" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors" title="Upcoming bills">
+          <a href="/subscriptions" class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors" title="Upcoming bills">
             <span class="material-symbols-outlined">notifications</span>
           </a>
           <%-- Avatar initials fallback --%>

@@ -29,7 +29,7 @@ public class Subscription {
     @Enumerated(EnumType.STRING)
     private Frequency frequency = Frequency.MONTHLY;
 
-    private Integer reminderDaysBefore = 3;
+    private Integer reminderDaysBefore = 5;
 
     @Enumerated(EnumType.STRING)
     private SubscriptionStatus status = SubscriptionStatus.ACTIVE;
