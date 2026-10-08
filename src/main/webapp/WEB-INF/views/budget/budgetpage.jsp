@@ -64,10 +64,10 @@
       <nav class="flex-1 space-y-1">
         <a class="<%= uri.equals("/home") ? active : inactive %>" href="/home"><span class="material-symbols-outlined">home</span><span class="font-label-lg text-label-lg">Home</span></a>
         <a class="<%= uri.startsWith("/transactions") ? active : inactive %>" href="/transactions"><span class="material-symbols-outlined">list_alt</span><span class="font-label-lg text-label-lg">Transactions</span></a>
-        <a class="<%= uri.startsWith("/budget") ? active : inactive %>" href="/budget"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">account_balance_wallet</span><span class="font-label-lg text-label-lg">Budget</span></a>
+        <a class="<%= active %>" href="/budget"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">account_balance_wallet</span><span class="font-label-lg text-label-lg">Budget</span></a>
         <a class="<%= uri.startsWith("/goals") ? active : inactive %>" href="/goals"><span class="material-symbols-outlined">stars</span><span class="font-label-lg text-label-lg">Goals</span></a>
         <a class="<%= uri.startsWith("/subscriptions") ? active : inactive %>" href="/subscriptions"><span class="material-symbols-outlined">subscriptions</span><span class="font-label-lg text-label-lg">Subscriptions</span></a>
-        <a class="<%= uri.startsWith("/reports") ? active : inactive %>" href="/reports"><span class="material-symbols-outlined">assessment</span><span class="font-label-lg text-label-lg">Reports</span></a>
+        <a class="<%= uri.startsWith("/report") ? active : inactive %>" href="/report"><span class="material-symbols-outlined">assessment</span><span class="font-label-lg text-label-lg">Reports</span></a>
       </nav>
       <div class="mt-auto px-2 pb-md">
         <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 transition-all" href="/logout">

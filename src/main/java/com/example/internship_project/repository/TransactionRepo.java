@@ -15,21 +15,21 @@ public interface TransactionRepo extends JpaRepository<Transactions, Long> {
     // HomeController — recent 5
     List<Transactions> findTop5ByUserUserIdOrderByTransactionDateDesc(Long userId);
 
-    // TransactionController — full list + filters
+    // TransactionController — full list
     List<Transactions> findByUserUserIdOrderByTransactionDateDesc(Long userId);
     List<Transactions> findByUserUserIdAndTransactionTypeOrderByTransactionDateDesc(Long userId, String type);
 
-    // Ownership-safe single fetch (edit / delete)
+    // Ownership-safe single fetch
     Transactions findByTransactionIdAndUserUserId(Long transactionId, Long userId);
 
-    // Summary totals (all categories)
-       @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
+    // ── All-time totals ──
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'INCOME'")
     BigDecimal sumIncomeByUserId(@Param("userId") Long userId);
 
-       @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE'")
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE'")
     BigDecimal sumExpensesByUserId(@Param("userId") Long userId);
 
-    // BudgetService — expenses for a specific category this month
+    // ── Monthly totals (BudgetService + ReportService) ──
     @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t " +
            "WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE' " +
            "AND t.category.categoryId = :categoryId " +
@@ -37,4 +37,25 @@ public interface TransactionRepo extends JpaRepository<Transactions, Long> {
            "AND YEAR(t.transactionDate)  = YEAR(CURRENT_DATE)")
     BigDecimal sumExpensesByUserIdAndCategoryId(@Param("userId") Long userId,
                                                 @Param("categoryId") Long categoryId);
+
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t " +
+           "WHERE t.user.userId = :userId AND t.transactionType = 'INCOME' " +
+           "AND MONTH(t.transactionDate) = :month AND YEAR(t.transactionDate) = :year")
+    BigDecimal sumIncomeByUserIdAndMonth(@Param("userId") Long userId,
+                                         @Param("month") int month,
+                                         @Param("year")  int year);
+
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transactions t " +
+           "WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE' " +
+           "AND MONTH(t.transactionDate) = :month AND YEAR(t.transactionDate) = :year")
+    BigDecimal sumExpensesByUserIdAndMonth(@Param("userId") Long userId,
+                                           @Param("month") int month,
+                                           @Param("year")  int year);
+
+    // ── Category breakdown for donut chart (ReportService) ──
+    @Query("SELECT c.categoryName, COALESCE(SUM(t.amount), 0) FROM Transactions t " +
+           "JOIN t.category c " +
+           "WHERE t.user.userId = :userId AND t.transactionType = 'EXPENSE' " +
+           "GROUP BY c.categoryName ORDER BY SUM(t.amount) DESC")
+    List<Object[]> sumExpensesByCategoryForUser(@Param("userId") Long userId);
 }

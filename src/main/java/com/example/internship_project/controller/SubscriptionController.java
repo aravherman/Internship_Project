@@ -27,7 +27,7 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    // ── LIST — GET /subscriptions ──
+    // list subscriptions
     @GetMapping
     public String listSubscriptions(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -82,7 +82,7 @@ public class SubscriptionController {
         return "subsc/subscriptionpage";
     }
 
-    // ── ADD FORM — GET /subscriptions/add ──
+    // add subsc
     @GetMapping("/add")
     public String showAddForm(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -93,7 +93,7 @@ public class SubscriptionController {
         return "subsc/add_subsc";
     }
 
-    // ── SAVE — POST /subscriptions/add ──
+    //save subsc
     @PostMapping("/add")
     public String saveSubscription(
             @RequestParam String serviceName,
@@ -125,7 +125,7 @@ public class SubscriptionController {
         return "redirect:/subscriptions";
     }
 
-    // ── TOGGLE STATUS — POST /subscriptions/{id}/toggle ──
+    // toggle subscription status
     @PostMapping("/{id}/toggle")
     public String toggleStatus(
             @PathVariable Long id,
@@ -155,7 +155,7 @@ public class SubscriptionController {
     //     return "redirect:/subscriptions";
     // }
 
-    // ── DELETE — POST /subscriptions/{id}/delete ──
+    // delete
     @PostMapping("/{id}/delete")
     public String deleteSubscription(
             @PathVariable Long id,

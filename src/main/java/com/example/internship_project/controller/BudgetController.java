@@ -27,7 +27,7 @@ public class BudgetController {
 
     @Autowired
     private CategoryRepo categoryRepo;
-    //  BUDGET OVERVIEW
+    //  overview
 
     @GetMapping
     public String budgetOverview(HttpSession session, Model model) {
@@ -78,8 +78,7 @@ public class BudgetController {
 
         return "budget/budgetpage";
     }
-    //  SET BUDGET FORM 
-
+    //  set budget
     @GetMapping("/set")
     public String showSetBudgetForm(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -90,7 +89,7 @@ public class BudgetController {
         return "budget/set_budget";
     }
 
-    //  SAVE BUDGET 
+    //  save budget 
 
     @PostMapping("/set")
     public String saveBudget(
@@ -112,7 +111,7 @@ public class BudgetController {
         redirectAttributes.addFlashAttribute("success", "Budget saved successfully.");
         return "redirect:/budget";
     }
-    //  DELETE BUDGET
+    //  delete
 
     @PostMapping("/delete/{id}")
     public String deleteBudget(
@@ -129,7 +128,7 @@ public class BudgetController {
         return "redirect:/budget";
     }
 
-    //  ADD CATEGORY FORM
+    //  add category
     @GetMapping("/category/add")
     public String showAddCategoryForm(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -140,7 +139,7 @@ public class BudgetController {
         return "budget/add_budget";
     }
 
-    //  SAVE CATEGORY
+    //  save category
 
     @PostMapping("/category/add")
     public String saveCategory(
@@ -163,7 +162,7 @@ public class BudgetController {
         if (description != null && !description.isBlank()) {
             cat.setDescription(description.trim());
         }
-        // CategoryType enum mapping — adjust if your enum values differ
+        // CategoryType enum mapping
         if (categoryType != null && !categoryType.isBlank()) {
             try {
                 cat.setCategoryType(

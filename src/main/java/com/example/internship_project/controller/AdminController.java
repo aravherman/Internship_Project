@@ -92,6 +92,6 @@ public class AdminController {
         userRepo.save(user);
 
         redirectAttributes.addFlashAttribute("success", user.getFullName() + " has been " + (newStatus.equals("ACTIVE") ? "activated" : "deactivated") + ".");
-        return "adminDash";
+        return "redirect:/admin/dashboard";
     }
 }

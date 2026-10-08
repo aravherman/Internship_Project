@@ -60,10 +60,10 @@ public class SubscriptionService {
     // ── Toggle ACTIVE ↔ PAUSED ──
     public boolean toggleStatus(Long id, Long userId) {
         Subscription s = subscriptionRepo.findBySubscriptionIdAndUserUserId(id, userId);
-        if (s == null) return false;
-        s.setStatus(s.getStatus() == SubscriptionStatus.ACTIVE
-                ? SubscriptionStatus.PAUSED
-                : SubscriptionStatus.ACTIVE);
+        if (s == null) 
+            return false;
+        s.setStatus(s.getStatus() == SubscriptionStatus.ACTIVE ? SubscriptionStatus.PAUSED : SubscriptionStatus.ACTIVE);
+
         subscriptionRepo.save(s);
         return true;
     }

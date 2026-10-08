@@ -48,7 +48,7 @@ public class AuthController {
         return "adminlogin";
     }
 
-    //  REGISTER
+    //  register
 
     @PostMapping("/register")
     public String handleRegister(
@@ -97,7 +97,7 @@ public class AuthController {
         return "redirect:/";
     }
 
-    //  USER LOGIN
+    //  user
 
     @PostMapping("/login")
     public String handleLogin(
@@ -132,7 +132,7 @@ public class AuthController {
         return "redirect:/home";
     }
 
-    //  ADMIN LOGIN
+    //  admin
 
     @PostMapping("/admin_login")
     public String handleAdminLogin( @RequestParam String email, @RequestParam String password, HttpSession session, RedirectAttributes redirectAttributes) {

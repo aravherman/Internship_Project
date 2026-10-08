@@ -100,7 +100,7 @@
       <a class="<%= inactive %>" href="/budget"><span class="material-symbols-outlined">account_balance_wallet</span><span class="font-label-lg text-label-lg">Budget</span></a>
       <a class="<%= active %>" href="/goals"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">stars</span><span class="font-label-lg text-label-lg">Goals</span></a>
       <a class="<%= inactive %>" href="/subscriptions"><span class="material-symbols-outlined">subscriptions</span><span class="font-label-lg text-label-lg">Subscriptions</span></a>
-      <a class="<%= inactive %>" href="/reports"><span class="material-symbols-outlined">assessment</span><span class="font-label-lg text-label-lg">Reports</span></a>
+      <a class="<%= inactive %>" href="/report"><span class="material-symbols-outlined">assessment</span><span class="font-label-lg text-label-lg">Reports</span></a>
     </nav>
     <div class="mt-auto px-2">
       <a class="flex items-center gap-sm text-on-surface-variant hover:bg-surface-container-low rounded-lg px-4 py-3 cursor-pointer transition-all" href="/logout">

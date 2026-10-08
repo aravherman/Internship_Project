@@ -112,7 +112,7 @@
           <span class="material-symbols-outlined">subscriptions</span>
           <span class="font-label-lg text-label-lg">Subscriptions</span>
         </a>
-        <a class="<%= uri.startsWith("/reports")       ? activeClass : inactiveClass %>" href="/reports">
+        <a class="<%= uri.startsWith("/report")       ? activeClass : inactiveClass %>" href="/report">
           <span class="material-symbols-outlined">assessment</span>
           <span class="font-label-lg text-label-lg">Reports</span>
         </a>
@@ -300,7 +300,7 @@
                   <span class="material-symbols-outlined">stars</span>
                   <span class="font-label-md text-label-md text-center">Goals</span>
                 </a>
-                <a href="/reports"
+                <a href="/report"
                   class="flex flex-col items-center gap-2 p-4 bg-surface-container-low rounded-xl hover:bg-primary-container/10 hover:text-primary transition-all text-on-surface-variant">
                   <span class="material-symbols-outlined">assessment</span>
                   <span class="font-label-md text-label-md text-center">Reports</span>
@@ -312,7 +312,7 @@
             <div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
               <div class="flex justify-between items-center mb-4">
                 <h2 class="font-headline-sm text-headline-sm text-on-surface">Upcoming Bills</h2>
-                <a href="/subsc/subscriptionpage" class="text-primary font-label-md text-label-md hover:underline">View All</a>
+                <a href="/subscriptions" class="text-primary font-label-md text-label-md hover:underline">View All</a>
               </div>
               <%-- Static placeholder — replace with dynamic data once SubscriptionService is ready --%>
               <div class="space-y-3">
@@ -326,7 +326,7 @@
                       <p class="text-[10px] text-on-surface-variant uppercase font-bold">Check Subscriptions page</p>
                     </div>
                   </div>
-                  <a href="/subsc/subscriptionpage" class="text-primary">
+                  <a href="/subscriptions" class="text-primary">
                     <span class="material-symbols-outlined text-sm">chevron_right</span>
                   </a>
                 </div>

@@ -31,10 +31,7 @@ public class GoalController {
 
     private static final BigDecimal MINIMUM_BALANCE = new BigDecimal("1000");
 
-    // ─────────────────────────────────────────────
-    //  LIST  —  GET /goals
-    // ─────────────────────────────────────────────
-
+    //  list all goals
     @GetMapping
     public String listGoals(HttpSession session, Model model) {
         User user = (User) session.getAttribute("loggedInUser");
@@ -86,9 +83,7 @@ public class GoalController {
         return "goals/goalspage";
     }
 
-    // ─────────────────────────────────────────────
-    //  ADD FORM  —  GET /goals/add
-    // ─────────────────────────────────────────────
+    //  add goals
 
     @GetMapping("/add")
     public String showAddForm(HttpSession session, Model model) {
@@ -100,9 +95,7 @@ public class GoalController {
         return "goals/add_goal";
     }
 
-    // ─────────────────────────────────────────────
-    //  SAVE  —  POST /goals/add
-    // ─────────────────────────────────────────────
+    //  save goal
 
     @PostMapping("/add")
     public String saveGoal(
@@ -131,11 +124,8 @@ public class GoalController {
         redirectAttributes.addFlashAttribute("success", "Goal \"" + goalName + "\" created!");
         return "redirect:/goals";
     }
-
-    // ─────────────────────────────────────────────
-    //  ADD FUNDS  —  POST /goals/{id}/fund
+    //  add funds  —  POST /goals/{id}/fund
     //  Records EXPENSE transaction + updates goal currentAmount atomically
-    // ─────────────────────────────────────────────
 
     @PostMapping("/{id}/fund")
     public String addFunds(
@@ -185,10 +175,7 @@ public class GoalController {
 
         return "redirect:/goals";
     }
-
-    // ─────────────────────────────────────────────
-    //  DELETE  —  POST /goals/{id}/delete
-    // ─────────────────────────────────────────────
+    //  delete
 
     @PostMapping("/{id}/delete")
     public String deleteGoal(
